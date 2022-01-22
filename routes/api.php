@@ -19,8 +19,14 @@ use App\Models\Province;
 |
 */
 
-Route::post('register', [AuthController::class, 'register'])->name('register');
-Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('get-provinces-list', [AuthController::class, 'getProvincesList'])->name('provinces');
+    Route::get('get-cities-list', [AuthController::class, 'getCitiesList'])->name('cities');
+    Route::post('register', [AuthController::class, 'register'])->name('register');
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+});
+
+// tester
 Route::get('/', function (Request $request) {
 });
 
