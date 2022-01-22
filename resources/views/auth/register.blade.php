@@ -74,6 +74,45 @@
                             </div>
 
                             <div class="row mb-3">
+                                <label for="province"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Province') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-select" aria-label="Default select example" id="province"
+                                        @error('province') is-invalid @enderror" name="province"
+                                        value="{{ old('province') }}" required autocomplete="province">
+                                        <option selected disabled>Open this select Province</option>
+                                        <option value="1">One</option>
+                                    </select>
+
+                                    @error('province')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="city" class="col-md-4 col-form-label text-md-end">{{ __('City') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-select" aria-label="Default select example" id="city"
+                                        @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}"
+                                        required autocomplete="city">
+                                        <option selected disabled>Open this select City</option>
+                                        <option value="1">One</option>
+                                    </select>
+
+                                    @error('city')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <label for="password"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
@@ -113,4 +152,14 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+    <script>
+        $('#province').on('click', function(e) {
+            console.log('ok')
+        });
+    </script>
 @endsection

@@ -9,4 +9,9 @@ class Province extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function City()
+    {
+        return $this->hasMany(City::class);
+    }
 }

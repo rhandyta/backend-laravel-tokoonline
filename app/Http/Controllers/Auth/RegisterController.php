@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Province;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -55,6 +56,8 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address' => ['required'],
             'phone' => ['required'],
+            'province_id' => ['required', 'numeric'],
+            'city_id' => ['required', 'numeric'],
         ]);
     }
 
@@ -72,6 +75,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'address' => $data['address'],
             'phone' => $data['phone'],
+            'province_id' => $data['province_id'],
+            'city_id' => $data['city_id'],
         ]);
     }
 }

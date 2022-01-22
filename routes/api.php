@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
-use App\Models\City;
-use App\Models\Province;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
+use App\Models\City;
+use App\Models\Province;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,13 +21,14 @@ use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login');
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
 });
 
 
 // Category
 Route::resource('category', CategoryController::class);
-
+// Product
+Route::resource('product', ProductController::class);
 
 
 
