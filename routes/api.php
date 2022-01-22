@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Models\City;
 use App\Models\Province;
 use Illuminate\Http\Request;
@@ -19,8 +20,16 @@ use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login');
-Route::get('/', function (Request $request) {
+Route::get('/', function () {
 });
+
+
+// Category
+Route::resource('category', CategoryController::class);
+
+
+
+
 Route::group([
     'prefix' => 'user',
     'middleware' => ['auth:sanctum']

@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('province_id')->references('id')->on('province')->onDelete('cascade');
+            $table->foreignId('province_id')->references('id')->on('provinces')->onDelete('cascade');
             $table->foreignId('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
