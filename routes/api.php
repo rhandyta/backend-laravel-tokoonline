@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Models\City;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login');
-
+Route::get('/', function (Request $request) {
+});
 Route::group([
     'prefix' => 'user',
     'middleware' => ['auth:sanctum']
