@@ -32,6 +32,8 @@ class AuthController extends Controller
             'address' => 'required',
             'phone' => 'required',
             'password' => 'required|min:6',
+            'province_id' => 'required',
+            'city_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -44,6 +46,8 @@ class AuthController extends Controller
             'address' => $request->address,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
+            'province_id' => $request->province_id,
+            'city_id' => $request->city_id,
         ]);
         if ($newUser) {
             $token = $newUser->createToken('auth_token')->plainTextToken;

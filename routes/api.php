@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -28,6 +29,13 @@ Route::group(['prefix' => 'auth'], function () {
 
 // tester
 Route::get('/', function (Request $request) {
+    $rajaongkir = RajaOngkir::provinsi()->all();
+    foreach ($rajaongkir as $raja) {
+        // return $raja;
+        Province::create([
+            'name' => $raja['province']
+        ]);
+    }
 });
 
 
@@ -35,6 +43,9 @@ Route::get('/', function (Request $request) {
 Route::resource('category', CategoryController::class);
 // Product
 Route::resource('product', ProductController::class);
+//Cart
+Route::post('cart', [CartController::class, 'store'])->name('cart');
+// transaction
 
 
 
