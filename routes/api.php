@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
@@ -29,13 +30,6 @@ Route::group(['prefix' => 'auth'], function () {
 
 // tester
 Route::get('/', function (Request $request) {
-    $rajaongkir = RajaOngkir::provinsi()->all();
-    foreach ($rajaongkir as $raja) {
-        // return $raja;
-        Province::create([
-            'name' => $raja['province']
-        ]);
-    }
 });
 
 
@@ -46,7 +40,7 @@ Route::resource('product', ProductController::class);
 //Cart
 Route::post('cart', [CartController::class, 'store'])->name('cart');
 // transaction
-
+Route::post('transaction', [TransactionController::class, 'transaction'])->name('transaction');
 
 
 Route::group([

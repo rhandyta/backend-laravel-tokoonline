@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'total_transaction', 'status_transaction'];
+    protected $fillable = ['user_id', 'total_transaction', 'status_transaction', 'code_transaction'];
 }
