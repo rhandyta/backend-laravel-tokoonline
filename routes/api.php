@@ -22,10 +22,10 @@ use App\Models\Province;
 */
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::get('get-provinces-list', [AuthController::class, 'getProvincesList'])->name('provinces');
-    Route::get('get-cities-list', [AuthController::class, 'getCitiesList'])->name('cities');
     Route::post('register', [AuthController::class, 'register'])->name('register');
     Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::get('get-province', [AuthController::class, 'getProvince']);
+    Route::get('get-cities', [AuthController::class, 'getCity']);
 });
 
 // tester

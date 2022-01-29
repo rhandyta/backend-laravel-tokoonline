@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CityResource;
+use App\Models\City;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,16 +14,16 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
 
-    public function getProvincesList()
+    public function getProvince()
     {
-        $provinces = DB::table('provinces')->select('name', 'id')->get();
-        return response()->json($provinces);
+        $province = DB::table('provinces')->select('id', 'name')->get();
+        return response()->json($province);
     }
 
-    public function getCitiesList(Request $request)
+    public function getCity(Request $request)
     {
-        $cities = DB::table('cities')->select('province_id', $request->province_id)->select('name', 'id');
-        return response()->json($cities);
+        $city = DB::table('cities')->where('province_id', $request->cities)->select('id', 'type', 'name')->get();
+        return response()->json($city);
     }
 
     public function register(Request $request)
