@@ -70,18 +70,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($slug)
     {
-        if (!$product) {
-            return response()->json([
-                'success' => false,
-                'data' => 'product not found',
-            ]);
-        }
-        return response()->json([
-            'success' => true,
-            'data' => $product
-        ]);
+        $product = Product::where('slug', $slug)->firstOrFail();
+        return response()->json($product);
     }
 
 

@@ -53,18 +53,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($slug)
     {
-        if (!$category) {
-            return response()->json([
-                'success' => false,
-                'data' => 'category not found',
-            ]);
-        }
-        return response()->json([
-            'success' => true,
-            'data' => $category
-        ]);
+        $category = Category::where('slug', $slug)->firstOrFail();
+        return response()->json($category);
     }
 
 

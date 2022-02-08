@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('slug');
             $table->string('address');
             $table->string('phone');
             $table->timestamp('email_verified_at')->nullable();
