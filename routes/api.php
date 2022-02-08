@@ -50,18 +50,17 @@ Route::get('/', function (Request $request) {
 // Category
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('category', CategoryController::class, ['except' => ['create', 'edit']]);
-});
 
-// Product
-Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    // Product
     Route::resource('product', ProductController::class, ['except' => ['create', 'edit']]);
-});
 
-//Cart
 
-Route::group(['auth:sanctum'], function () {
+    //Cart
+
     Route::resource('cart', CartController::class, ['only' => ['store', 'destroy', 'index']]);
-});
 
-// transaction
-Route::post('transaction', [TransactionController::class, 'transaction'])->name('transaction');
+
+    // transaction
+    Route::resource('transaction', TransactionController::class, ['only' =>  ['store', 'index', 'show']]);
+});

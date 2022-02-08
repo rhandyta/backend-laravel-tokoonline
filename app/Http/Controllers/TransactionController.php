@@ -13,7 +13,21 @@ use Illuminate\Support\Facades\Validator;
 
 class TransactionController extends Controller
 {
-    public function transaction(Request $request)
+
+
+    public function index()
+    {
+        $transaction = Transaction::where('user_id', Auth('sanctum')->user()->id)->get();
+        return response()->json($transaction);
+    }
+
+    public function show($orderNumber)
+    {
+        $getSingleOrder = DetailTransaction::where('order_number', $orderNumber)->firstOrFail();
+        return response()->json($getSingleOrder);
+    }
+
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
