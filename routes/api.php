@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
@@ -21,12 +22,24 @@ use App\Models\Province;
 |
 */
 
+// Auth
 Route::group(['prefix' => 'auth'], function () {
     Route::post('register', [AuthController::class, 'register'])->name('register');
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::get('get-province', [AuthController::class, 'getProvince']);
     Route::get('get-cities', [AuthController::class, 'getCity']);
 });
+
+// Profile
+Route::group([
+    'prefix' => 'user',
+    'middleware' => ['auth:sanctum']
+], function () {
+    Route::get('{user:slug}', [UserController::class, 'show']);
+
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+});
+
 
 // tester
 Route::get('/', function (Request $request) {
@@ -41,14 +54,3 @@ Route::resource('product', ProductController::class);
 Route::post('cart', [CartController::class, 'store'])->name('cart');
 // transaction
 Route::post('transaction', [TransactionController::class, 'transaction'])->name('transaction');
-
-
-Route::group([
-    'prefix' => 'user',
-    'middleware' => ['auth:sanctum']
-], function () {
-    Route::get('profile', function (Request $request) {
-        return auth()->user();
-    });
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-});

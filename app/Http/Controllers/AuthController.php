@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CityResource;
+use App\Http\Resources\UserResource;
 use App\Models\City;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -73,7 +74,8 @@ class AuthController extends Controller
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json(['success' => false, 'message' => 'you unathorized'], 401);
         }
-        $user = User::where('email', $request->email)->firstOrFail();
+        User::where('email', $request->email)->firstOrFail();
+        $user = UserResource::make($request->user());
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json(['success' => true, 'user' => $user, 'token' => $token, 'type_token' => 'Bearer'], 200);
     }
