@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendCheckoutNotification;
 use App\Models\DetailTransaction;
 use App\Models\Transaction;
+use App\Notifications\CheckoutNotification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 
 class TransactionController extends Controller
@@ -23,7 +27,6 @@ class TransactionController extends Controller
                 'message' => $validator->fails()
             ], 401);
         }
-
         $codeTransaction = date('dmY') . floor(rand(1, 99)) . uniqid();
         $transaction = Transaction::create([
             'user_id' => $request->user_id,
@@ -40,6 +43,9 @@ class TransactionController extends Controller
             'price' => $request->price,
             'total' => $request->total
         ]);
+        $user = Auth('sanctum')->user();
+        $delay = now()->addMinutes(1);
+        Notification::sendNow($user, (new CheckoutNotification($detailTransactions))->delay($delay));
 
         return response()->json([
             'success' => true,

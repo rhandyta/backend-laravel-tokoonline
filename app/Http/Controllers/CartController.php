@@ -44,7 +44,7 @@ class CartController extends Controller
 
     public function destroy($id)
     {
-        $checkout = Cart::where('id', $id)->firstOrFail();
+        $checkout = Cart::where('id', $id);
         $checkout->delete();
     }
 }
