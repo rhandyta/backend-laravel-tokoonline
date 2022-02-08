@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+
+    public function index()
+    {
+        $user = Auth('sanctum')->user()->id;
+        $cart = Cart::where('user_id', $user)->get();
+        return response()->json($cart);
+    }
+
     public function store(Request $request)
     {
         $user = DB::table('carts', $request->user_id)->where('product_id', $request->product_id)->first();
@@ -32,5 +40,11 @@ class CartController extends Controller
             'success' => true,
             'carts' => $cart
         ]);
+    }
+
+    public function destroy($id)
+    {
+        $checkout = Cart::where('id', $id)->firstOrFail();
+        $checkout->delete();
     }
 }

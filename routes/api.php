@@ -57,7 +57,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 //Cart
-Route::post('cart', [CartController::class, 'store'])->name('cart');
+
+Route::group(['auth:sanctum'], function () {
+    Route::resource('cart', CartController::class, ['only' => ['store', 'destroy', 'index']]);
+});
 
 // transaction
 Route::post('transaction', [TransactionController::class, 'transaction'])->name('transaction');
