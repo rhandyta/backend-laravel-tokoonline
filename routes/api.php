@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -47,6 +48,8 @@ Route::get('/', function (Request $request) {
 });
 
 
+
+
 // Category
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('category', CategoryController::class, ['except' => ['create', 'edit']]);
@@ -64,3 +67,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // transaction
     Route::resource('transaction', TransactionController::class, ['only' =>  ['store', 'index', 'show']]);
 });
+
+
+// Payment
+Route::post('payment-handler', [OrderController::class, 'payment_handler']);

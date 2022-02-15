@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -16,8 +17,12 @@ use Spatie\Permission\Models\Role;
 |
 */
 
-Route::get('/', function () {
-});
+// Midtrans
+Route::get('/', [OrderController::class, 'index']);
+Route::get('payment', [OrderController::class, 'payment']);
+Route::post('payment', [OrderController::class, 'payment_post']);
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
