@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 use App\Models\City;
 use App\Models\Province;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,9 @@ Route::group([
 
 // tester
 Route::get('/', function (Request $request) {
+    // $user = User::find(2);
+    // return $user->assignRole('user');
+    // return $user;
 });
 
 

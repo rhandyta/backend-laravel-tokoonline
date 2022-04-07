@@ -44,10 +44,11 @@ class AuthController extends Controller
         }
 
         $newUser = User::create([
-            'name' => $request->name,
+            'name' => ucwords($request->name),
             'email' => $request->email,
             'address' => $request->address,
             'phone' => $request->phone,
+            'slug' => \Str::slug(strtolower($request->name)),
             'password' => Hash::make($request->password),
             'province_id' => $request->province_id,
             'city_id' => $request->city_id,

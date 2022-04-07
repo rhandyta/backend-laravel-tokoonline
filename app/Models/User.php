@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'address',
+        'slug',
         'phone',
         'province_id',
         'city_id',
